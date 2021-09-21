@@ -1,6 +1,9 @@
-import express from 'express';
+import express, { NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import {Request, Response} from 'express';
+
+const validURL = require('valid-url');
 
 (async () => {
 
@@ -30,6 +33,43 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
+
+  app.get("/filteredimage", async (req:Request, res:Response, next:NextFunction) => {
+
+    //1. validate the image_url query
+    if(!req.query.image_url || !validURL.isUri(req.query.image_url)){
+      res.status(400).send({message: 'Bad request'});
+    }
+    else{
+
+      console.log(req.query.image_url);
+
+      //2. call filterImageFromURL(image_url) to filter the image
+      const filteredpath:string = await filterImageFromURL(req.query.image_url);
+
+      console.log(filteredpath);
+
+      //3. send the resulting file in the response
+      res.status(200).sendFile(filteredpath, (err)=>{
+        if(err){
+          console.log(err);
+          next();
+        }
+        else{
+          //4. deletes any files on the server on finish of the response
+          const filesToDelete:Array<string> = new Array<string>();
+
+          filesToDelete.push(filteredpath);
+
+          deleteLocalFiles(filesToDelete);
+
+          next();
+
+        }
+      });
+    }
+
+  });
   
   // Root Endpoint
   // Displays a simple message to the user
