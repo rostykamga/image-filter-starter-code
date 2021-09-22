@@ -10,9 +10,6 @@
     "dev": "ts-node-dev ./src/server.ts",
     "start": "node server.js"
   },
-  "engines": { 
-    "node" : "12.22.5"
-   },
   "repository": {
     "type": "git",
     "url": "https://github.com/rostykamga/image-filter-starter-code.git"

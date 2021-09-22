@@ -16,7 +16,7 @@ const validURL = require('valid-url');
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
-  // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
+  // @DONE1 IMPLEMENT A RESTFUL ENDPOINT
   // GET /filteredimage?image_url={{URL}}
   // endpoint to filter an image from a public url.
   // IT SHOULD
@@ -32,7 +32,7 @@ const validURL = require('valid-url');
 
   /**************************************************************************** */
 
-  //! END @TODO1
+  //! END @DONE1
 
   app.get("/filteredimage", async (req:Request, res:Response, next:NextFunction) => {
 
@@ -42,12 +42,8 @@ const validURL = require('valid-url');
     }
     else{
 
-      console.log(req.query.image_url);
-
       //2. call filterImageFromURL(image_url) to filter the image
       const filteredpath:string = await filterImageFromURL(req.query.image_url);
-
-      console.log(filteredpath);
 
       //3. send the resulting file in the response
       res.status(200).sendFile(filteredpath, (err)=>{
