@@ -2,7 +2,7 @@
   "name": "udacity-c2-image-filter",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./www/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf www/ || true",
@@ -10,16 +10,19 @@
     "dev": "ts-node-dev ./src/server.ts",
     "start": "node ./www/server.js"
   },
+  "engines": { 
+    "node" : "12.22.6"
+   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grutt/udacity-c2-image-filter.git"
+    "url": "https://github.com/rostykamga/image-filter-starter-code.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/grutt/udacity-c2-image-filter/issues"
+    "url": "https://github.com/rostykamga/image-filter-starter-code/issues"
   },
-  "homepage": "https://github.com/grutt/udacity-c2-image-filter#readme",
+  "homepage": "https://github.com/rostykamga/image-filter-starter-code#readme",
   "devDependencies": {
     "@types/bluebird": "^3.5.27",
     "@types/express": "^4.17.0",
