@@ -15,6 +15,7 @@ export async function filterImageFromURL(inputURL: string): Promise<string>{
     return new Promise( async (resolve, reject) => {
 
         try{
+            // inspired by https://stackoverflow.com/questions/62217642/react-and-typescript-which-types-for-axios-response
             const imageBuffer:axios.AxiosResponse = await axios.default.get<Buffer>(inputURL, {responseType: 'arraybuffer'});
 
             const photo = await Jimp.read(imageBuffer.data);
