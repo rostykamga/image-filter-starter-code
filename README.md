@@ -7,12 +7,15 @@ The project is split into three parts:
 A basic Ionic client web application which consumes the RestAPI Backend. [Covered in the course]
 2. [The RestAPI Backend](https://github.com/udacity/cloud-developer/tree/master/course-02/exercises/udacity-c2-restapi), a Node-Express server which can be deployed to a cloud service. [Covered in the course]
 3. [The Image Filtering Microservice](https://github.com/rostykamga/image-filter-starter-code), the final project for the course. It is a Node-Express application which runs a simple script to process images. [This Project]
+It is available [here](http://udagram-image-filter-dev2222.us-east-1.elasticbeanstalk.com/)
 
 ## Tasks
 
+We were provided starter code of image filter microservice, and required to implement a stubed method to accept url of an image as `GET` query param, then use the provided helper function to download and filter that image, and then send back the filtered image to the client.
+
 ### Setup Node Environment
 
-You'll need to create a new node server. Open a new terminal within the project directory and run:
+To run this fully implemented project, you'll need install the required dependencies. Open a new terminal within the project directory and run:
 
 1. Initialize a new project: `npm i`
 2. run the development server with `npm run dev`
