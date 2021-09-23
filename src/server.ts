@@ -38,31 +38,35 @@ const validURL = require('valid-url');
 
     //1. validate the image_url query
     if(!req.query.image_url || !validURL.isUri(req.query.image_url)){
-      res.status(400).send({message: 'Bad request'});
+      res.status(400).send({message: 'Bad request, you need to set image_url query with public image url'});
     }
     else{
 
-      //2. call filterImageFromURL(image_url) to filter the image
-      const filteredpath:string = await filterImageFromURL(req.query.image_url);
+      try{
+        //2. call filterImageFromURL(image_url) to filter the image
+        const filteredpath:string = await filterImageFromURL(req.query.image_url);
 
-      //3. send the resulting file in the response
-      res.status(200).sendFile(filteredpath, (err)=>{
-        if(err){
-          console.log(err);
-          next();
-        }
-        else{
-          //4. deletes any files on the server on finish of the response
-          const filesToDelete:Array<string> = new Array<string>();
+        //3. send the resulting file in the response
+        res.status(200).sendFile(filteredpath, (err)=>{
+          if(err){
+            console.log(err);
+            next();
+          }
+          else{
+            //4. deletes any files on the server on finish of the response
+            const filesToDelete:Array<string> = new Array<string>();
 
-          filesToDelete.push(filteredpath);
+            filesToDelete.push(filteredpath);
 
-          deleteLocalFiles(filesToDelete);
+            deleteLocalFiles(filesToDelete);
 
-          next();
+            next();
 
-        }
-      });
+          }
+        });
+      }catch(e){
+        res.status(422).send({error: e});
+      }
     }
 
   });
